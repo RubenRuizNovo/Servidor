@@ -31,8 +31,11 @@
 			$stock = $producto['Stock'];								
 			echo "<tr><td>$nom</td><td>$des</td><td>$peso</td><td>$stock</td>
 			<td><form action = 'anadir.php' method = 'POST'>
-			<input name = 'unidades' type='number' min = '1' value = '1'>
-			<input type = 'submit' value='Comprar'><input name = 'cod' type='hidden' value = '$cod'>
+			<input name = 'unidades' type='number' min = '1' value = '1'>";
+			if($stock > 0){
+				echo "<input type = 'submit' value='Comprar'>";
+			}
+			echo "<input name = 'cod' type='hidden' value = '$cod'>
 			</form></td></tr>";
 		}
 		echo "</table>"			
