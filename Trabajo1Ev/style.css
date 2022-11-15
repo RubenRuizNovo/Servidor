@@ -1,0 +1,41 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 200px;
+}
+p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cajon {
+    box-shadow:
+    inset 0 -3em 3em rgba(0,0,0,0.1),
+          0 0  0 2px rgb(250, 250, 250),
+          0.3em 0.3em 1em rgba(0,0,0,0.3);
+
+    background-color: #FAFAFA;
+    padding: 40px;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.enviar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.registro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+}
