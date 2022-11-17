@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="cajon">
             <h2 class="usuario">Login</h2>
             <p>Usuario</p>
-            <input type="text" name="usuario" />
+            <input type="text" name="usuario" placeholder="Introduce nombre..."/>
             <br>
             <br>
             <p>Contraseña</p>
