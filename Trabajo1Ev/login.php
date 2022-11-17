@@ -1,16 +1,20 @@
 <?php
+include "bd.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo "El usuario es: " . $_POST['usuario'];
+    echo "La contrasseña es: ". $_POST['passw'];
 
-    $usu = comprobarUsuario($_POST['usuario'], $_POST['clave']);
+    $usu = comprobarUsuario($_POST['usuario'], $_POST['passw']);
     if ($usu === false) {
         $err = true;
         $usuario = $_POST['usuario'];
+        echo "Usuario o contraseña incorrecta.";
     } else {
         session_start();
         $_SESSION['usuario'] = $_POST['usuario'];
         $_SESSION['puntuacion'] = 0;
         setcookie("NumPartidas", 0);
-        header("Location: juego.php");
+        header("Location: bienvenido.php");
         return;
     }
 
@@ -33,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br>
             <br>
             <p>Contraseña</p>
-            <input type="text" name="contraseña" />
+            <input type="text" name="passw" />
             <br>
             <br>
             <div class="enviar">
