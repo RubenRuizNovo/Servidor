@@ -12,10 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         session_start();
         $_SESSION['usuario'] = $_POST['usuario'];
-        $_SESSION['puntuacion'] = 0;
         setcookie("NumPartidas", 0);
         header("Location: bienvenido.php");
-        return;
     }
 
     

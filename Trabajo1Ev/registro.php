@@ -1,5 +1,6 @@
 <?php
 include "validadorRegistro.php";
+include "bd.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $nombre = $_POST["nombre"];
@@ -9,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $flag = false;
 
     if (validadorNombre($nombre)) {
-        echo "Error. El apellido tiene que tener una longitud entre 3 y 20 caracteres y la primera letra tiene que ser mayuscula. <br>";
+        echo "Error. El nombre tiene que tener una longitud entre 3 y 20 caracteres y la primera letra tiene que ser mayuscula. <br>";
         $flag = true;
     }
     if (correoRepetido($email)) {
@@ -26,7 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // }
 
     if (!$flag) {
-        header("Location: login.php");
+        try{
+            crearUsuarioLogin($usuario,$pasw,$email,$nombre);
+            crearUsuarioPartidas($usuario);
+            header("Location: login.php");
+        }catch(\Throwable $th){
+            echo "Error.";
+        }
+        
     }
 }
 ?>

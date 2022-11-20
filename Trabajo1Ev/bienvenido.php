@@ -3,6 +3,14 @@
 require_once 'sesiones.php';
 require_once 'bd.php';
 comprobar_sesion();
+$_COOKIE['NumPartidas'] += 1;
+$_SESSION['puntuacion'] = 0;
+$_SESSION['numerosRepetidos'] = array();
+$_SESSION['numeroSeleccionado'] = numeroSinRepetir($_SESSION['numerosRepetidos']);
+array_push($_SESSION['numerosRepetidos'],$_SESSION['numeroSeleccionado']);
+$_SESSION['palabraIngles'] = seleccionarPalabra($_SESSION['numeroSeleccionado']);
+
+print_r($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,11 +23,13 @@ comprobar_sesion();
 </head>
 
 <body>
-    <h2>Bienvenido al juego <?php $_SESSION['usuario'] ?></h2>
-    <p>Tu puntuación maxima es: <?php puntuacionMaxima($_SESSION['usuario'])?></p>
+    <h2>Bienvenido al juego <?php echo $_SESSION['usuario']?></h2>
+    <p>Tu puntuación maxima es: <?php echo puntuacionMaxima($_SESSION['usuario'])?></p>
     <?php
-    if(isset($_COOKIE['numPartidas'])){
-        echo "<p>LLevas".$_COOKIE['numPartidas']." partidas jugadas</p>";
+    if(isset($_COOKIE['NumPartidas'])){
+        echo "<p>Llevas ". $_COOKIE['NumPartidas']." partidas jugadas</p>";
+    }else{
+        echo "Las cookies no estan habilitadas";
     }
     ?>
     
@@ -27,7 +37,7 @@ comprobar_sesion();
         <a href="juego.php">JUGAR</a>
     </button>
     <button>
-        <a href="login.php">SALIR</a>
+        <a href="logout.php">SALIR</a>
     </button>
 </body>
 
