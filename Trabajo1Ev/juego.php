@@ -5,12 +5,12 @@ include 'bd.php';
     $palabraCorrecta = true;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //Cuando llega aqui me dice que la variable no existe
-    echo "La palabra es: " . $_SESSION["palabraIngles"] ."<br>";
-    echo "Tu has dicho que era: " . $_POST['palabraEspañol']."<br>";
+    echo "<div class='respuesta'>";
+    echo "<br>La palabra es: " . $_SESSION["palabraIngles"] ."<br><br>";
+    echo "Tu has dicho que era: " . strtolower($_POST['palabraEspañol'])."<br><br>";
     
-    if(comprobarPalabra($_SESSION["palabraIngles"],$_POST['palabraEspañol'])){
-        echo "RESPUESTA CORRECTA.";
+    if(comprobarPalabra($_SESSION["palabraIngles"],strtolower($_POST['palabraEspañol']))){
+        echo "RESPUESTA CORRECTA.<br><br>";
         $_SESSION['puntuacion'] += 50;
         if (count($_SESSION['numerosRepetidos']) < 50) {
             $_SESSION['numeroSeleccionado'] = numeroSinRepetir($_SESSION['numerosRepetidos']);
@@ -27,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $palabraCorrecta = false;
     }
 
+    echo "</div>";
+
     
 }
 ?>
@@ -36,25 +38,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
     <title>Document</title>
 </head>
 <body>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <?php
     //Inicializo la variable y le doy un valor
+    echo "<div class='contenedorJuego'>";
         if ($palabraCorrecta) {
+            
+            echo "<div class='c1'>";
             echo '<p id="puntucacion">Puntuacion Actual: ' . $_SESSION["puntuacion"] .'</p>
             <p id="palabraIngles">Palabra en Ingles: ' .  $_SESSION["palabraIngles"] .'</p>
             <label for="palabraEspañol">Introduce la traduccion: </label>
             <input type="text" name="palabraEspañol"/>
             <br>
-            <label for="Comprobar">Comprobar</label>
-            <input type="submit"/>';
+            <input type="submit" value="Comprobar"/>';
+            echo "<br>";
+            echo "</div>";
+            
         }else {
             echo '<h3>Respuesta incorrecta</h3>';
             echo '<p>Has conseguido '. $_SESSION["puntuacion"].' puntos.</p>';
             header('Refresh: 5; URL=postGame.php');
         }
+        echo "</div>";
     ?>
 </form>
 </body>

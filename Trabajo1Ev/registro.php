@@ -8,17 +8,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $pasw = $_POST["pasw"];
     $flag = false;
+    echo "<div class='erroresRegistro'>";
 
     if (validadorNombre($nombre)) {
         echo "Error. El nombre tiene que tener una longitud entre 3 y 20 caracteres y la primera letra tiene que ser mayuscula. <br>";
         $flag = true;
     }
     if (correoRepetido($email)) {
-        echo "Este correo ya esta en uso. Introduce otro correo.";
+        echo "Este correo ya esta en uso. Introduce otro correo.<br>";
         $flag = true;
     }
     if(usuarioRepetido($usuario)) {
-        echo "Este usuario ya esta en uso. Intenta otro nombre de usuario";
+        echo "Este usuario ya esta en uso. Intenta otro nombre de usuario.<br>";
         $flag = true;
     }
     // if(validadorEdad($pasw)){
@@ -37,17 +38,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
     }
 }
+echo "</div>";
 ?>
 <html>
 
 <head>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
     <div class="Formulario">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div class="contenedor">
+            <div class="c1">
             <h1>Registrarse</h1>
             <br><br>
             <label for="nombre"> Nombre: </label>
@@ -64,7 +68,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br><br>
             <input type="submit">
             <br><br>
+            <button>
             <a href="login.php">Login</a>
+            </button>
+            <br>
+            </div>
+            </div>
+            
         </form>
     </div>
 </body>

@@ -1,0 +1,73 @@
+body {
+  background: #a6bddc;
+}
+.contenedor {
+  margin-top: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 400px;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 16px;
+
+  background: #c4d2e7;
+}
+
+.c1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.respuesta {
+  margin-top: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 400px;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 16px;
+  background: #c4d2e7;
+}
+
+.contenedorJuego {
+  margin-top: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 400px;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 16px;
+  background: #c4d2e7;
+}
+
+.erroresRegistro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 800px;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 8px;
+    background: #c4d2e7;
+}
+
+.errorlogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 800px;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 8px;
+    background: #c4d2e7;
+}

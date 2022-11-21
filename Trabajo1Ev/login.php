@@ -1,18 +1,17 @@
 <?php
 include "bd.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "El usuario es: " . $_POST['usuario'];
-    echo "La contrasseña es: ". $_POST['passw'];
-
     $usu = comprobarUsuario($_POST['usuario'], $_POST['passw']);
     if ($usu === false) {
         $err = true;
         $usuario = $_POST['usuario'];
+        echo "<div class='errorlogin'>";
         echo "Usuario o contraseña incorrecta.";
+        echo "</div>";
     } else {
+        setcookie("NumPartidas", 0);
         session_start();
         $_SESSION['usuario'] = $_POST['usuario'];
-        setcookie("NumPartidas", 0);
         header("Location: bienvenido.php");
     }
 
@@ -22,21 +21,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="cajon">
+        <div class="contenedor">
+            <div class="c1">
             <h2 class="usuario">Login</h2>
             <p>Usuario</p>
             <input type="text" name="usuario" placeholder="Introduce nombre..."/>
             <br>
-            <br>
             <p>Contraseña</p>
-            <input type="text" name="passw" />
-            <br>
+            <input type="password" name="passw" />
             <br>
             <div class="enviar">
                 <input type="submit" />
@@ -46,7 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button>
                     <a href="registro.php">Registro</a>
                 </button>
+                
             </div>
+            <br>
+            <br>
 
 
         </div>

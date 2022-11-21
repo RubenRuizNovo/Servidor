@@ -121,12 +121,36 @@ function crearUsuarioPartidas($usuario) {
 
 function mostrarRanking() {
     $mysqli = new mysqli("localhost", "root", "","prueba_juego");
-    $query = 'SELECT usu_login,pun_max from usuarios ORDER BY pun_max ASC';
+    $query = 'SELECT usu_login,pun_max from usuarios ORDER BY pun_max DESC';
     $result = $mysqli -> query($query);
     $pos = 1;
     foreach ($result as $res) {
-        echo "<p>" . $pos . "º posicion -> " . $res['usu_login'] . " con ". $res['pun_max'] . "puntos</p>";
+        echo "<p>" . $pos . "º posicion -> " . $res['usu_login'] . " con ". $res['pun_max'] . " puntos</p>";
         $pos += 1;
     }
+    return;
+}
+
+function actualizarPuntuacionesSinCookies($usuario,$puntuacion) {
+
+    if($puntuacion > puntuacionMaxima($usuario)) {
+        $query = "UPDATE `usuarios` SET `pun_max`= '" . $puntuacion . "',`pun_total`=(`pun_total` + '".$puntuacion."') WHERE usu_login = '".$usuario."'";
+    } else {
+        $query = "UPDATE `usuarios` SET `pun_total`=(`pun_total` + '".$puntuacion."') WHERE usu_login = '".$usuario."'";
+    }
+    $mysqli = new mysqli("localhost", "root", "","prueba_juego");
+    $result = $mysqli -> query($query);
+    return;
+}
+
+function actualizarPuntuacionesConCookies($usuario,$puntuacion,$numPartidas) {
+
+    if($puntuacion > puntuacionMaxima($usuario)) {
+        $query = "UPDATE `usuarios` SET `pun_max`= '" . $puntuacion . "',`pun_total`=(`pun_total` + '".$puntuacion."'), `partidas_total` = (`partidas_total`+ '".$numPartidas."') WHERE usu_login = '".$usuario."'";
+    } else {
+        $query = "UPDATE `usuarios` SET `pun_total`=(`pun_total` + '".$puntuacion."'), `partidas_total` = (`partidas_total`+ '".$numPartidas."') WHERE usu_login = '".$usuario."'";
+    }
+    $mysqli = new mysqli("localhost", "root", "","prueba_juego");
+    $result = $mysqli -> query($query);
     return;
 }
