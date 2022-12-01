@@ -1,6 +1,6 @@
 <?php 	
 	require 'sesiones_json.php';
-	require_once '..\cap4\bd.php';	
+	require_once 'bd.php';	
 	if(!comprobar_sesion()) return;		
 	$productos = cargar_productos(array_keys($_SESSION['carrito']));
 	// hay que añadir las unidades
